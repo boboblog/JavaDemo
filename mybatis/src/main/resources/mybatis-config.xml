@@ -4,31 +4,41 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-	<!--定义别名  -->
+
+	<!-- 指定LOG4J输出日志 -->
+	<settings>
+		<setting name="logImpl" value="LOG4J"/>
+	</settings>
+	
+	<!--定义包的别名  -->
     <typeAliases>
       <package name="com.hwb.pojo"/>
     </typeAliases>
     
+    <!--数据库连接信息  --> 
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/how2java?characterEncoding=UTF-8"/>
+                <property name="url" value="jdbc:mysql://39.105.172.23:3306/hwb?characterEncoding=UTF-8"/>
                 <property name="username" value="root"/>
-                <property name="password" value="admin"/>
+                <property name="password" value="root"/>
             </dataSource>
         </environment>
     </environments>
     
     <mappers>
-    	<!--用文件路径引入映射器  -->
-        <mapper resource="com/hwb/pojo/Category.xml"/>
-        <mapper resource="com/hwb/pojo/Product.xml"/>
-        <mapper resource="com/hwb/pojo/Order.xml"/>
-        <mapper resource="com/hwb/pojo/OrderItem.xml"/>
+    	<!--用文件路径引入映射器  -->        
+        <mapper resource="com/hwb/mapper/UserMapper.xml"/>
+        <mapper resource="com/hwb/mapper/RoleMapper.xml"/>
+        <mapper resource="com/hwb/mapper/UserRoleMapper.xml"/>
+        <mapper resource="com/hwb/mapper/PrivilegeMapper.xml"/>
+        <mapper resource="com/hwb/mapper/RolePrivilegeMapper.xml"/>
+        
         <!--用包名引入映射器  -->
-       <!--  <mapper name="com.hwb.pojo" /> -->
+       	<package name="com.hwb.mapper"/>
+       
     </mappers>
     
 </configuration>
