@@ -3,6 +3,7 @@ package com.hwb.pojo;
  * 角色表
  */
 import java.util.Date;
+import java.util.List;
 
 public class SysRole {
 	
@@ -17,6 +18,8 @@ public class SysRole {
 	private Long createBy;
 	//创建时间
 	private Date createTime;
+	//角色包含的权限列表
+	private List<SysPrivilege> privilegeList;
 	
 	public Long getId() {
 		return id;
@@ -47,6 +50,12 @@ public class SysRole {
 	}
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+	public List<SysPrivilege> getPrivilegeList() {
+		return privilegeList;
+	}
+	public void setPrivilegeList(List<SysPrivilege> privilegeList) {
+		this.privilegeList = privilegeList;
 	}
 
 }

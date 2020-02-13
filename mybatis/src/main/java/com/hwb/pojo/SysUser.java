@@ -1,6 +1,7 @@
 package com.hwb.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 /*
  * 用户表
@@ -21,7 +22,12 @@ public class SysUser {
 	private byte[] headImg;
 	//创建时间
 	private Date createTime;
+	//用户角色
+	private SysRole role;
+	//用户角色集合
+	private List<SysRole> roleList;
 	
+
 	public Long getId() {
 		return id;
 	}
@@ -64,5 +70,16 @@ public class SysUser {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-
+	public SysRole getRole() {
+		return role;
+	}
+	public void setRole(SysRole role) {
+		this.role = role;
+	}
+	public List<SysRole> getRoleList() {
+		return roleList;
+	}
+	public void setRoleList(List<SysRole> roleList) {
+		this.roleList = roleList;
+	}
 }
