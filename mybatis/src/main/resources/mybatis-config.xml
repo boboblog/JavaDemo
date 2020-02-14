@@ -5,6 +5,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 <configuration>
 
+	<properties resource="jdbc.properties"/>
+
 	<settings>
 		<!-- 指定LOG4J输出日志 -->
 		<setting name="logImpl" value="LOG4J"/>
@@ -23,10 +25,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://39.105.172.23:3306/hwb?characterEncoding=UTF-8"/>
-                <property name="username" value="root"/>
-                <property name="password" value="root"/>
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
             </dataSource>
         </environment> 
     </environments>
