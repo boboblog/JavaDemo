@@ -3,6 +3,7 @@ package com.hwb.test;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -311,17 +312,22 @@ public class TestUserMapper extends TestBaseMapper {
 		}
 	}
 	
-	@Ignore
+
 	@Test
 	public void testSelectByIdList() {
 		SqlSession sqlSession = getSqlSession();
 		try {
 			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-			List<Long> idList = new ArrayList<Long>();
-			idList.add(1L);
-			idList.add(1001L);
-			List<SysUser> userList = userMapper.selectByIdList(idList);
-			Assert.assertEquals(2, userList.size());
+//			List<Long> idList = new ArrayList<Long>();
+//			idList.add(1L);
+//			idList.add(1001L);
+			SysUser sysUser = new SysUser();
+			String[] strings = {"1","2"};
+			sysUser.addExtField("ids", strings);
+			List<SysUser> userList = userMapper.selectByIdList(sysUser);
+			for(SysUser sysUsersUser : userList) {
+				System.out.println("用户名："+sysUser.getUserName());
+			}
 		}finally {
 			sqlSession.close();
 		}
@@ -438,19 +444,298 @@ public class TestUserMapper extends TestBaseMapper {
 		}
 	}
 	
+	@Ignore
+	@Test
+	public void test1() {
+		String[] s = {"1","2"};
+		String[] s2 = {};
+		StringBuffer sb1 = new StringBuffer();
+		StringBuffer sb2 = new StringBuffer();
+		for(int i=0; i<s.length; i++) {
+			sb1.append(s[i]);
+			if(i<s.length-1) {
+				sb1.append(',');
+			}
+		}
+		for(int i=0; i<s2.length; i++) {
+			sb2.append(s2[i]);
+			if(i<s2.length-1) {
+				sb2.append(',');
+			}
+		}
+		System.out.println(sb1.toString());
+		System.out.println(sb2.toString());
+		if(sb1.length()!=0 && sb2.length()!=0) {
+			sb1.append(',');
+			sb1.append(sb2);
+		}
+		
+		System.out.println(sb1.toString());
+		
+	}
 	
+	@Ignore
+	@Test
+	public void test2() {
+		String type = "3";
+		switch(type) {
+			case "1":
+				System.out.println(1);
+			case "2":
+				System.out.println(2);
+			default:
+				System.out.println(3);
+		}
+	}
 	
+	@Ignore
+	@Test
+	public void test3() {
+		HashMap<String, Object> valueMap = new HashMap<>();
+        StringBuffer sb1 = new StringBuffer();
+        String[] array = {};
+        valueMap.put("searchName", "");
+        valueMap.put("enterpriseType", "");
+        valueMap.put("s_tagIds", "");
+        valueMap.put("s_purchaseIds", "");
+        valueMap.put("s_purchaseNames", "");
+        System.out.println("开始转换");
+        
+        String[] s_purchaseIds = {};
+        if(valueMap.get("s_purchaseIds") !=null ) {
+        	s_purchaseIds = (String[]) valueMap.get("s_purchaseIds");
+            System.out.println("转换成功");
+        }
+       
+
+//        String s_tagIds = (String)valueMap.get("s_tagIds");
+//        if (s_tagIds != null && s_tagIds.length() != 0) {
+//            String[] s_array = s_tagIds.split(",");
+//            Long[] tagIds = new Long[s_array.length];
+//            for (int i = 0; i < s_array.length; i++) {
+//                tagIds[i] = Long.valueOf(s_array[i]);
+//            }
+//            System.out.println("根据会员等级查询所对应的租户id：" + tagIds);
+//        }
+        if(s_purchaseIds != null && s_purchaseIds.length != 0){
+        	Long[] purchaseIds = new Long[s_purchaseIds.length];
+            for (int i = 0; i < s_purchaseIds.length; i++) {
+                purchaseIds[i] = Long.valueOf(s_purchaseIds[i]);
+            }
+            System.out.println("采购商id:" + s_purchaseIds);
+        }
+        
+        System.out.println("不执行");
+	 }
 	
+	@Ignore
+	@Test
+	public void test() {
+		
+		SysUser sysUser0 = new SysUser();
+		sysUser0.setId(0l);
+		SysUser sysUser1 = new SysUser();
+		sysUser1.setId(1l);
+		SysUser sysUser2 = new SysUser();
+		sysUser2.setId(3l);
+
+		List<SysUser> sList = new ArrayList<SysUser>();
+
+		List<SysUser> sList2 = new ArrayList<SysUser>();
+		
+		sList.add(sysUser0);
+		sList.add(sysUser1);
+		sList.add(sysUser2);
+		
+		sList2.add(sysUser1);
+		sList2.add(sysUser2);
+		
+		for(SysUser s1 : sList) {
+			for(SysUser s2 : sList2) {
+				if(s1.getId().equals(s2.getId())) {
+					sList.remove(s1);
+					sList2.remove(s2);
+					continue;
+				}
+			}
+		}
+		
+		if(!sList.isEmpty()) {
+			System.out.println("s1:");
+			for(SysUser s1 : sList) {
+				System.out.println(s1.getId());
+			}
+		}
+		if(!sList2.isEmpty()) {
+			System.out.println("s2");
+			for(SysUser s2 : sList2) {
+				System.out.println(s2.getId());
+			}
+		}
+	}
 	
+	@Ignore
+	@Test
+	public void test6() {
+		SysUser sysUser0 = new SysUser();
+		sysUser0.setId(0l);
+		SysUser sysUser1 = new SysUser();
+		sysUser1.setId(1l);
+		SysUser sysUser2 = new SysUser();
+		sysUser2.setId(3l);
+		List<SysUser> sList = new ArrayList<SysUser>();
+		sList.add(sysUser0);
+		sList.add(sysUser1);
+		sList.add(sysUser2);
+		for(SysUser sysUser : sList) {
+			if(sysUser.getId() == 1l) {
+				sList.remove(sysUser);
+			}
+		}
+		for(SysUser sysUser : sList) {
+			System.out.println(sysUser.getId());
+		}
+	}
 	
+	@Ignore
+	@Test
+	public void test7() {
+	     List<Integer> listA=new ArrayList<>();
+	     listA.add(1);
+	     listA.add(2);
+	     listA.add(3);
+	     List<Integer> listB=new ArrayList<>();
+	     listB.add(1);
+	     listB.add(5);
+	     listB.add(2);
+	     
+	     Iterator<Integer> ita = listA.iterator();
+	     Iterator<Integer> itb = listB.iterator();
+	     int i = 0;
+	     while (ita.hasNext()) {
+	    	 Integer a = ita.next();
+	    	 System.out.println("a:"+a);
+		     while (itb.hasNext()) {
+		    	 Integer b= itb.next();
+		    	 System.out.println("b:"+b);
+		    	 if(a==b) {
+		    		 ita.remove();
+		    		 itb.remove();
+		    	 }
+		    	 i++;
+		    	 System.out.println("比较次数："+i);
+			}
+		}
+	    
+	     for(Integer integer : listA) {
+	    	 System.out.println(integer);
+	     }
+	     for(Integer integer : listB) {
+	    	 System.out.println(integer);
+	     }
+	}
 	
+	@Ignore
+	@Test
+	public void test8() {
+	     List<Integer> listA=new ArrayList<>();
+	     listA.add(1);
+	     listA.add(2);
+	     listA.add(9);
+	     listA.add(4);
+	     List<Integer> listB=new ArrayList<>();
+	     listB.add(1);
+	     listB.add(5);
+	     listB.add(9);
+	     listB.add(2);
+	     int z=0;
+	     List<Integer> listC = new ArrayList<Integer>();
+	     //移除b中相同
+	     for(int i=0; i<listA.size(); i++) {
+	    	 for(int j=0; j<listB.size(); j++) {    		
+	    		 if(listA.get(i) == listB.get(j)) {	
+	    			 listC.add(listB.get(j));
+	    			 listB.remove(listB.get(j));
+	    			 j--;
+	    			 continue;
+	    		 }
+	    		 z++;
+	    	 }
+	     }
+	     //移除a中相同
+	     for(int i=0; i<listC.size(); i++) {
+	    	 for(int j=0; j<listA.size(); j++) {
+	    		 if(listC.get(i) == listA.get(j)  ) {
+	    			 listA.remove(listA.get(j));
+	    			 j--;
+	    			 continue;
+	    		 }
+	    	 }
+	     }
+	     
+	     System.out.println("遍历总次数："+z);
+	     System.out.println("lista:");
+	     for(Integer integer : listA) {
+	    	 System.out.println(integer);
+	     }
+	     System.out.println("listb");
+	     for(Integer integer : listB) {
+	    	 System.out.println(integer);
+	     }
+	     System.out.println("listc");
+	     for(Integer integer : listC) {
+	    	 System.out.println(integer);
+	     }
+	}
 	
+	@Ignore
+	@Test
+	public void test9() {
+	     List<Integer> listA=new ArrayList<>();
+	     listA.add(1);
+	     listA.add(2);
+	     listA.add(3);
+	     List<Integer> listB=new ArrayList<>();
+	     listB.add(1);
+	     listB.add(5);
+	     listB.add(2);
+	     int z=0;
+	     for(int i=0; i<listA.size(); i++) {
+	    	 if(listA.get(i)==3) {
+	    		 listA.remove(i);
+	    		 i--;
+	    	 }
+	     }
+	    
+	     for(Integer integer : listA) {
+	    	 System.out.println(integer);
+	     }
+	     for(Integer integer : listB) {
+	    	 System.out.println(integer);
+	     }
+	}
 	
+	@Ignore
+	@Test
+	public void test11() {
+		String a = null;
+		String b = "";
+		System.out.println(b.equals(a));
+		System.out.println(a.equals(b));
+	}
 	
+	@Ignore
+	@Test
+	public void test22() {
+		String[] strings = {"1","2","3"};
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("strings", strings);
 	
-	
-	
-	
+		Object[] objects = (Object[]) map.get("strings");
+		for(int i=0; i<objects.length; i++) {
+			System.out.println(objects[i]);
+		}
+	}
 	
 	
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+        
+<generatorConfiguration>
+	
+	<properties resource="jdbc.properties"/>
+	
+	<context id="MySqlContext" targetRuntime="Mybatis3Simple" defaultModelType="flat">
+	
+		<property name="autoDelimitKeywords" value="true"/>
+		<property name="beginningDelimiter" value="`"/>
+		<property name="endingDelimiter" value="`"/>
+		
+		<!-- 定义一个插件，用于扩展或修改通过MBG生成的代码，数目不限 -->
+		<plugin type=""></plugin>
+		
+		<!-- 配置如何生成注释信息,所含三个可选属性默认值都为false -->
+		<commentGenerator>
+			<!-- 为true时，不生成注释 -->
+			<property name="suppressAllComments" value="false"/>
+			<!-- 为true时，生成的注释包含时间戳 -->
+			<property name="suppressDate" value="true"/>
+			<!-- 为true时，生成的注释添加数据库表的备注信息 -->
+			<property name="addRemarkComments" value="true"/>
+		</commentGenerator>
+		
+		<!-- 指定数据库连接信息 -->
+		<jdbcConnection driverClass="${jdbc.driver}" connectionURL="${jdbc.url}" 
+						userId="${jdbc.username}" password="${jdbc.password}">
+		</jdbcConnection>
+		
+		<!-- 指定JDBC类型和Java类型如何转换，最多配置一个 -->
+		<javaTypeResolver></javaTypeResolver>
+		
+		<!-- 用于控制生成的实体类，必须且仅能配置一个 -->
+		<javaModelGenerator targetPackage="com.hwb.pojo" targetProject="src/main/java"></javaModelGenerator>
+		
+		<!-- 用于配置SQL映射生成器(Mapper.xml文件)的属性，最多配置一个 -->
+		<sqlMapGenerator targetPackage="test.xml" targetProject="src\main\resources"/>
+		
+		<!-- 用于配置Java客户端生成器(Mapper接口)的属性，最多配置一个 -->
+		<javaClientGenerator targetPackage="test.dao" targetProject="src\main\java" type="XMLMAPPER"/>
+		
+		<!-- 最少配置一个，只有这里配置过的表才能经过上述其他配置生成最终的代码 -->
+		<table tableName="%">
+			<generatedKey column="id" sqlStatement="Mysql"/>
+		</table>
+			
+	</context>	
+	
+</generatorConfiguration>

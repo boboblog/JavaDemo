@@ -1,42 +1,15 @@
 package com.hwb.pojo;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /*
  * 用户表
  */
-public class SysUser {
+public class SysUserCriteria {
 	
 	//用户ID
 	private Long id;
-	
-	private String ids;
-	private Map<String, Object> extFields;
-	public String getIds() {
-		return ids;
-	}
-	public void setIds(String ids) {
-		this.ids = ids;
-	}
-	
-	public Map<String, Object> getExtFields() {
-		return extFields;
-	}
-	public void setExtFields(Map<String, Object> extFields) {
-		this.extFields = extFields;
-	}
-
-	 public void addExtField(String fieldName, Object filedValue)
-	  {
-	    if (this.extFields == null) {
-	      this.extFields = new HashMap();
-	    }
-	    this.extFields.put(fieldName, filedValue);
-	  }
-
 	//用户名
 	private String userName;
 	//用户密码
@@ -54,7 +27,17 @@ public class SysUser {
 	//用户角色集合
 	private List<SysRole> roleList;
 	
+	//布尔值测试查询
+	private boolean bussinessOppty;
+
 	
+
+	public boolean isBussinessOppty() {
+		return bussinessOppty;
+	}
+	public void setBussinessOppty(boolean bussinessOppty) {
+		this.bussinessOppty = bussinessOppty;
+	}
 	public Long getId() {
 		return id;
 	}

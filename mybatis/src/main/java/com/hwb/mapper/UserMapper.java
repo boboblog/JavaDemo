@@ -112,7 +112,7 @@ public interface UserMapper {
 	 * @param idList
 	 * @return
 	 */
-	List<SysUser> selectByIdList(List<Long> idList);
+	List<SysUser> selectByIdList(SysUser sysUser);
 	
 	/**
 	  * 批量插入用户信息
